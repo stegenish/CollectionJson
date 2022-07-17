@@ -54,10 +54,10 @@ namespace Test.CollectionJson
             AssertToken("}", TokenType.CloseCurly, tokens[4]);
         }
 
-        private static void AssertToken(string expectedTokenString, TokenType expectedTokenType, CJsonToken expectedToken)
+        private static void AssertToken(string expectedTokenString, TokenType expectedTokenType, CJsonToken actualToken)
         {
-            Assert.Equal(expectedTokenString, expectedToken.Token);
-            Assert.Equal(expectedTokenType, expectedToken.TokenType);
+            Assert.Equal(expectedTokenString, actualToken.Token);
+            Assert.Equal(expectedTokenType, actualToken.TokenType);
         }
     }
 }
