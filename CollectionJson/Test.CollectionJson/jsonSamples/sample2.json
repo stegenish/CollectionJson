@@ -1,0 +1,409 @@
+﻿{
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:618dae12-440c-567a-9d75-fa8f6e13c059",
+      "resource": {
+        "meta": {
+          "profile": [ "http://ehelse.no/fhir/StructureDefinition/vkp-Composition-v090" ]
+        },
+        "author": [
+          {
+            "display": "Line Danser",
+            "identifier": {
+              "system": "urn:oid:2.16.578.1.12.4.1.4.1",
+              "value": "13116900216"
+            }
+          }
+        ],
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "2",
+                "display": "Digital hjemmeoppfølging",
+                "system": "http://ehelse.no/fhir/CodeSystem/vkp-composition-category-v090"
+              }
+            ]
+          }
+        ],
+        "date": "2022-04-02T12:59:37Z",
+        "section": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "code": "1.1",
+                  "display": "beskrivelse av oppfølging",
+                  "system": "http://ehelse.no/fhir/CodeSystem/vkp-composition-section-v090"
+                }
+              ]
+            },
+            "entry": [
+              {
+                "reference": "urn:uuid:acf5bdee-5eb9-5a19-b4ca-c41ce60de8ae"
+              }
+            ],
+            "text": {
+              "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Ringte pasient, han følger seg ikke bra</div>",
+              "status": "additional"
+            },
+            "title": "Oppfølging"
+          }
+        ],
+        "status": "final",
+        "subject": {
+          "display": "Kaller Krank",
+          "identifier": {
+            "system": "urn:oid:2.16.578.1.12.4.1.4.1",
+            "value": "12121244444"
+          }
+        },
+        "title": "Journalnotat",
+        "type": {
+          "coding": [
+            {
+              "code": "34133-9",
+              "display": "Summary of episode note",
+              "system": "https://loinc.org"
+            }
+          ]
+        },
+        "resourceType": "Composition"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:acf5bdee-5eb9-5a19-b4ca-c41ce60de8ae",
+      "resource": {
+        "meta": {
+          "profile": [ "http://ehelse.no/fhir/StructureDefinition/vkp-DetectedIssue-v090" ]
+        },
+        "author": {
+          "identifier": {
+            "value": "VKP testsystem"
+          }
+        },
+        "code": {
+          "coding": [
+            {
+              "code": "5.2.2",
+              "display": "Skjemabesvarelse",
+              "system": "http://ehelse.no/fhir/CodeSystem/vkp-alert-code-v090"
+            }
+          ]
+        },
+        "identifiedPeriod": {
+          "end": "2022-04-02T12:42:37Z",
+          "start": "2022-04-01T12:42:37Z"
+        },
+        "implicated": [
+          {
+            "display": "Søvnkvalitet",
+            "reference": "urn:uuid:8fa326cc-8ffd-59d2-96d8-180a0ed5a56d"
+          }
+        ],
+        "patient": {
+          "display": "Kaller Krank",
+          "identifier": {
+            "system": "urn:oid:2.16.578.1.12.4.1.4.1",
+            "value": "12121244444"
+          }
+        },
+        "severity": "high",
+        "status": "final",
+        "resourceType": "DetectedIssue"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:8fa326cc-8ffd-59d2-96d8-180a0ed5a56d",
+      "resource": {
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "survey",
+                "display": "Survey",
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "code": "74465-6",
+              "display": "Questionnaire response document",
+              "system": "http://loinc.org"
+            }
+          ]
+        },
+        "derivedFrom": [
+          {
+            "reference": "urn:uuid:ddeb1eaa-4235-540c-999b-b54277d830cf"
+          }
+        ],
+        "effectiveInstant": "2022-04-01T12:42:37Z",
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "code": "AA",
+                "display": "Critical abnormal",
+                "system": "https://www.hl7.org/fhir/valueset-observation-interpretation.html"
+              }
+            ]
+          }
+        ],
+        "referenceRange": [
+          {
+            "high": {
+              "code": "{score}",
+              "system": "http://unitsofmeasure.org",
+              "value": 2
+            },
+            "type": {
+              "coding": [
+                {
+                  "code": "N",
+                  "display": "normal",
+                  "system": "https://www.hl7.org/fhir/valueset-observation-interpretation.html"
+                }
+              ]
+            }
+          },
+          {
+            "high": {
+              "code": "{score}",
+              "system": "http://unitsofmeasure.org",
+              "value": 5
+            },
+            "low": {
+              "code": "{score}",
+              "system": "http://unitsofmeasure.org",
+              "value": 3
+            },
+            "type": {
+              "coding": [
+                {
+                  "code": "A",
+                  "display": "Abnormal",
+                  "system": "https://www.hl7.org/fhir/valueset-observation-interpretation.html"
+                }
+              ]
+            }
+          },
+          {
+            "low": {
+              "code": "{score}",
+              "system": "http://unitsofmeasure.org",
+              "value": 6
+            },
+            "type": {
+              "coding": [
+                {
+                  "code": "AA",
+                  "display": "Critical abnormal",
+                  "system": "https://www.hl7.org/fhir/valueset-observation-interpretation.html"
+                }
+              ]
+            }
+          }
+        ],
+        "status": "final",
+        "valueQuantity": {
+          "code": "{score}",
+          "system": "http://unitsofmeasure.org",
+          "value": 7
+        },
+        "resourceType": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ddeb1eaa-4235-540c-999b-b54277d830cf",
+      "resource": {
+        "author": {
+          "display": "Line Danser",
+          "identifier": {
+            "system": "urn:oid:2.16.578.1.12.4.1.4.1",
+            "value": "13116900216"
+          }
+        },
+        "item": [
+          {
+            "answer": [
+              {
+                "valueCoding": {
+                  "code": "4",
+                  "display": "Bra, men noe våkentid",
+                  "system": "http://codeisriskpoints.org"
+                }
+              }
+            ],
+            "linkId": "0",
+            "text": "Sov du godt i natt?"
+          },
+          {
+            "answer": [
+              {
+                "valueCoding": {
+                  "code": "3",
+                  "display": "3",
+                  "system": "http://codeisriskpoints.org"
+                }
+              }
+            ],
+            "linkId": "1",
+            "text": "Hvordan trøtt følte du deg når du sto opp (skala fra 1 til 5)"
+          },
+          {
+            "answer": [
+              {
+                "valueCoding": {
+                  "code": "1",
+                  "display": "Stress",
+                  "system": "http://codeisriskpoints.org"
+                }
+              },
+              {
+                "valueCoding": {
+                  "code": "4",
+                  "display": "Smerter",
+                  "system": "http://codeisriskpoints.org"
+                }
+              }
+            ],
+            "linkId": "2",
+            "text": "Hva tenker du forstyrrer søvnen din?"
+          }
+        ],
+        "status": "completed",
+        "subject": {
+          "display": "Line Danser",
+          "identifier": {
+            "system": "urn:oid:2.16.578.1.12.4.1.4.1",
+            "value": "13116900216"
+          }
+        },
+        "resourceType": "QuestionnaireResponse",
+        "_questionnaire": {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/display",
+              "valueString": "Søvnkvalitet"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:cbe58c60-e4ae-5b89-997c-e4c15152b66b",
+      "resource": {
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "survey",
+                "display": "Survey",
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "code": "74465-6",
+              "display": "Questionnaire response document",
+              "system": "http://loinc.org"
+            }
+          ]
+        },
+        "derivedFrom": [
+          {
+            "reference": "urn:uuid:b5c505e4-2388-54a4-a835-36d8bf7a1337"
+          }
+        ],
+        "effectiveInstant": "2022-04-01T12:42:37Z",
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "code": "A",
+                "display": "Abnormal",
+                "system": "https://www.hl7.org/fhir/valueset-observation-interpretation.html"
+              }
+            ]
+          }
+        ],
+        "referenceRange": [
+          {
+            "high": {
+              "code": "{score}",
+              "system": "http://unitsofmeasure.org",
+              "value": 5
+            },
+            "type": {
+              "coding": [
+                {
+                  "code": "N",
+                  "display": "normal",
+                  "system": "https://www.hl7.org/fhir/valueset-observation-interpretation.html"
+                }
+              ]
+            }
+          },
+          {
+            "high": {
+              "code": "{score}",
+              "system": "http://unitsofmeasure.org",
+              "value": 14
+            },
+            "low": {
+              "code": "{score}",
+              "system": "http://unitsofmeasure.org",
+              "value": 6
+            },
+            "type": {
+              "coding": [
+                {
+                  "code": "A",
+                  "display": "Abnormal",
+                  "system": "https://www.hl7.org/fhir/valueset-observation-interpretation.html"
+                }
+              ]
+            }
+          },
+          {
+            "low": {
+              "code": "{score}",
+              "system": "http://unitsofmeasure.org",
+              "value": 15
+            },
+            "type": {
+              "coding": [
+                {
+                  "code": "AA",
+                  "display": "Critical abnormal",
+                  "system": "https://www.hl7.org/fhir/valueset-observation-interpretation.html"
+                }
+              ]
+            }
+          }
+        ],
+        "status": "final",
+        "valueQuantity": {
+          "code": "{score}",
+          "system": "http://unitsofmeasure.org",
+          "value": 12
+        },
+        "resourceType": "Observation"
+      }
+    }
+  ],
+  "identifier": {
+    "system": "http://fhir.dignio.com/bundle-identifier",
+    "value": "urn:uuid:23598151-daae-55a2-9c0c-eece825f635e"
+  },
+  "timestamp": "2022-04-01T12:42:37Z",
+  "type": "document",
+  "resourceType": "Bundle"
+}

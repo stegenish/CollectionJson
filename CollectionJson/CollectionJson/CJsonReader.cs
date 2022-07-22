@@ -182,8 +182,13 @@ public class CJsonReader
 
         while (lookingForToken && !Peek(out char c))
         {
-            if (c != '"')
+            if (c == '\\')
             {
+                buffer.Append(ReadEscapeSequence());
+            }
+            else if (c != '"')
+            {
+                
                 buffer.Append(Read().c);
             }
             else
@@ -195,6 +200,24 @@ public class CJsonReader
         }
 
         return CreateToken(buffer.ToString(), TokenType.String);
+    }
+
+    private char ReadEscapeSequence()
+    {
+        Consume("\\");
+        var value = Read().c switch
+        {
+            '"' => '"',
+            '\\' => '\\',
+            '/' => '/',
+            'b' => '\b',
+            'f' => '\f',
+            'r' => '\r',
+            'n' => '\n',
+            't' => '\t',
+            var c => throw new CJsonLexerException($"Invalid escape sequence: {c}")
+        };
+        return value;
     }
 
     private CJsonToken CreateToken(string s, TokenType tokenType)

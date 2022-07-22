@@ -15,5 +15,6 @@ public enum TokenType
     Comma,
     Null,
     True,
-    False
+    False,
+    EndOfStreamToken
 }

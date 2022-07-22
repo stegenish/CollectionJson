@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections;
+using System.Text;
 
 namespace CollectionJson
 {
@@ -28,6 +29,8 @@ namespace CollectionJson
                     _ => throw new CJsonLexerException($"unexpected character in input: {c}"),
                 });
             }
+
+            cJsonTokens.Add(new CJsonToken("", TokenType.EndOfStreamToken));
             return cJsonTokens;
         }
 
