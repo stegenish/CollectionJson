@@ -1,24 +1,22 @@
-﻿using System.Text.RegularExpressions;
-using CollectionJson;
-using static CollectionJson.TokenType;
+﻿using static CollectionJson.TokenType;
 
-namespace Test.CollectionJson;
+namespace CollectionJson;
 
 public class Parser
 {
-    public static ParsedJson Parse(List<CJsonToken> tokens)
+    public static ParsedJson Parse(List<JsonToken> tokens)
     {
         using var tokenStream = tokens.Where(t => t.TokenType != WhiteSpace).GetEnumerator();
         tokenStream.MoveNext();
         var value = ParseValue(tokenStream);
         return value switch
         {
-            Dictionary<string, object> => new ParsedJson(CJsonType.Dictionary, value),
-            List<object> => new ParsedJson(CJsonType.Array, value)
+            Dictionary<string, object> => new ParsedJson(ValueType.Dictionary, value),
+            List<object> => new ParsedJson(ValueType.Array, value)
         };
     }
 
-    private static object ParseValue(IEnumerator<CJsonToken> tokenStream)
+    private static object ParseValue(IEnumerator<JsonToken> tokenStream)
     {
         return tokenStream.Current.TokenType switch
         {
@@ -30,7 +28,7 @@ public class Parser
         };
     }
 
-    private static Dictionary<string, object> ParseDictionary(IEnumerator<CJsonToken> tokenStream)
+    private static Dictionary<string, object> ParseDictionary(IEnumerator<JsonToken> tokenStream)
     {
         Consume(tokenStream, OpenCurly);
         var dictionary = new Dictionary<string, object>();
@@ -53,7 +51,7 @@ public class Parser
         return dictionary;
     }
 
-    private static List<object> ParseArray(IEnumerator<CJsonToken> tokenStream)
+    private static List<object> ParseArray(IEnumerator<JsonToken> tokenStream)
     {
         Consume(tokenStream, OpenSquare);
         var array = new List<object>();
@@ -74,7 +72,7 @@ public class Parser
         return array;
     }
 
-    private static (string key, object valueStr) ParseKeyValue(IEnumerator<CJsonToken> tokenStream)
+    private static (string key, object valueStr) ParseKeyValue(IEnumerator<JsonToken> tokenStream)
     {
         var key = Consume(tokenStream, TokenType.String).AsString();
         Consume(tokenStream, Colon);
@@ -83,7 +81,7 @@ public class Parser
         return v;
     }
 
-    private static CJsonToken Consume(IEnumerator<CJsonToken> tokenStream, TokenType tokenType)
+    private static JsonToken Consume(IEnumerator<JsonToken> tokenStream, TokenType tokenType)
     {
         var current = tokenStream.Current;
         if (current.TokenType == tokenType && tokenStream.MoveNext())

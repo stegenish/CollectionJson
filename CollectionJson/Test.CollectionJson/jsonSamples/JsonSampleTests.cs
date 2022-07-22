@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CollectionJson;
+using ValueType = CollectionJson.ValueType;
 
 namespace Test.CollectionJson.jsonSamples
 {
@@ -13,7 +14,7 @@ namespace Test.CollectionJson.jsonSamples
         public void TestSample1()
         {
             var value = Parser.Parse(Lexer.Lex(TestDataUtils.ReadFile("sample1.json")));
-            Assert.Equal(CJsonType.Array, value.TopLevelType);
+            Assert.Equal(ValueType.Array, value.TopLevelType);
             var array = value.Value as List<object>;
             Assert.Equal(4, array!.Count);
             var dict = array[2] as Dictionary<string, object>;
@@ -25,7 +26,7 @@ namespace Test.CollectionJson.jsonSamples
         public void TestSample2()
         {
             var value = Parser.Parse(Lexer.Lex(TestDataUtils.ReadFile("sample2.json")));
-            Assert.Equal(CJsonType.Dictionary, value.TopLevelType);
+            Assert.Equal(ValueType.Dictionary, value.TopLevelType);
         }
     }
 }

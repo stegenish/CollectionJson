@@ -3,12 +3,12 @@ using System.Text;
 
 namespace CollectionJson;
 
-public class CJsonReader
+public class JsonReader
 {
     private readonly string _buffer;
     private int _nextChar;
 
-    public CJsonReader(string json)
+    public JsonReader(string json)
     {
         _buffer = json;
         _nextChar = 0;
@@ -52,7 +52,7 @@ public class CJsonReader
             if (b != c || eof)
             {
                 var bufferLength = _buffer.Length >= _nextChar ? _buffer.Length - 1 : _nextChar;
-                throw new CJsonLexerException($"Expected {s}, found {_buffer.Substring(startChar, bufferLength)}");
+                throw new LexerException($"Expected {s}, found {_buffer.Substring(startChar, bufferLength)}");
             }
         }
 
@@ -82,53 +82,53 @@ public class CJsonReader
         return Consume(c.ToString());
     }
 
-    public CJsonToken ReadFalse()
+    public JsonToken ReadFalse()
     {
         if (ConsumeIfMatch("false"))
         {
             return CreateToken("false", TokenType.False);
         }
 
-        throw new CJsonLexerException("Invalid token starting at");
+        throw new LexerException("Invalid token starting at");
     }
 
-    public CJsonToken ReadToken(string tokenString, TokenType tokenType)
+    public JsonToken ReadToken(string tokenString, TokenType tokenType)
     {
         if (ConsumeIfMatch(tokenString))
         {
             return CreateToken(tokenString, tokenType);
         }
 
-        throw new CJsonLexerException("Invalid token starting at");
+        throw new LexerException("Invalid token starting at");
     }
 
-    public CJsonToken ReadToken(char c, TokenType tokenType)
+    public JsonToken ReadToken(char c, TokenType tokenType)
     {
         return CreateToken(Consume(c), tokenType);
     }
 
-    public CJsonToken ReadTrue()
+    public JsonToken ReadTrue()
     {
         if (ConsumeIfMatch("true"))
         {
             return CreateToken("true", TokenType.True);
         }
 
-        throw new CJsonLexerException("Invalid token starting at");
+        throw new LexerException("Invalid token starting at");
     }
 
-    public CJsonToken ReadNull()
+    public JsonToken ReadNull()
     {
         if (ConsumeIfMatch("null"))
         {
             return CreateToken("null", TokenType.Null);
         }
 
-        throw new CJsonLexerException("Invalid token starting at");
+        throw new LexerException("Invalid token starting at");
     }
 
 
-    public CJsonToken ReadNumber()
+    public JsonToken ReadNumber()
     {
         var buffer = new StringBuilder();
         bool lookingForToken = true;
@@ -155,7 +155,7 @@ public class CJsonReader
         return CreateToken(buffer.ToString(), tokenType);
     }
 
-    public CJsonToken ReadWhiteSpace()
+    public JsonToken ReadWhiteSpace()
     {
         var buffer = new StringBuilder();
         bool lookingForToken = true;
@@ -175,7 +175,7 @@ public class CJsonReader
         return CreateToken(buffer.ToString(), TokenType.WhiteSpace);
     }
 
-    public CJsonToken ReadString()
+    public JsonToken ReadString()
     {
         var buffer = new StringBuilder(Consume("\""));
         bool lookingForToken = true;
@@ -215,13 +215,13 @@ public class CJsonReader
             'r' => '\r',
             'n' => '\n',
             't' => '\t',
-            var c => throw new CJsonLexerException($"Invalid escape sequence: {c}")
+            var c => throw new LexerException($"Invalid escape sequence: {c}")
         };
         return value;
     }
 
-    private CJsonToken CreateToken(string s, TokenType tokenType)
+    private JsonToken CreateToken(string s, TokenType tokenType)
     {
-        return new CJsonToken(s, tokenType);
+        return new JsonToken(s, tokenType);
     }
 }

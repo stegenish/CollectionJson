@@ -6,6 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using CollectionJson;
+using ValueType = CollectionJson.ValueType;
 
 namespace Test.CollectionJson
 {
@@ -16,7 +17,7 @@ namespace Test.CollectionJson
         {
             ParsedJson result = Parser.Parse(Lexer.Lex("{}"));
 
-            Assert.Equal(CJsonType.Dictionary, result.TopLevelType);
+            Assert.Equal(ValueType.Dictionary, result.TopLevelType);
             Assert.IsType<Dictionary<string, object>>(result.Value);
         }
 
@@ -26,7 +27,7 @@ namespace Test.CollectionJson
         {
             ParsedJson result = Parser.Parse(Lexer.Lex("[]"));
 
-            Assert.Equal(CJsonType.Array, result.TopLevelType);
+            Assert.Equal(ValueType.Array, result.TopLevelType);
             Assert.IsType<List<object>>(result.Value);
         }
 
@@ -35,7 +36,7 @@ namespace Test.CollectionJson
         {
             ParsedJson result = Parser.Parse(Lexer.Lex("[[]]"));
 
-            Assert.Equal(CJsonType.Array, result.TopLevelType);
+            Assert.Equal(ValueType.Array, result.TopLevelType);
             var resultValue = result.Value as List<object>;
             Assert.IsType<List<object>>(resultValue![0]);
         }
@@ -45,7 +46,7 @@ namespace Test.CollectionJson
         {
             ParsedJson result = Parser.Parse(Lexer.Lex(@"[1, ""2""]"));
 
-            Assert.Equal(CJsonType.Array, result.TopLevelType);
+            Assert.Equal(ValueType.Array, result.TopLevelType);
             var resultValue = result.Value as List<object>;
             Assert.Equal("2", resultValue![1]);
         }
@@ -61,7 +62,7 @@ namespace Test.CollectionJson
         {
             ParsedJson result = Parser.Parse(Lexer.Lex(@"{""test"" : ""text""}"));
 
-            Assert.Equal(CJsonType.Dictionary, result.TopLevelType);
+            Assert.Equal(ValueType.Dictionary, result.TopLevelType);
             var dictionary = result.Value as Dictionary<string, object>;
             Debug.Assert(dictionary != null, nameof(dictionary) + " != null");
             var value = dictionary["test"];
@@ -110,7 +111,7 @@ namespace Test.CollectionJson
         {
             ParsedJson result = Parser.Parse(Lexer.Lex(@"{""test"" : ""text"", ""test2"" : ""text2""}"));
 
-            Assert.Equal(CJsonType.Dictionary, result.TopLevelType);
+            Assert.Equal(ValueType.Dictionary, result.TopLevelType);
             var dictionary = result.Value as Dictionary<string, object>;
             Assert.Equal(2, dictionary!.Count);
             var value = dictionary!["test2"];

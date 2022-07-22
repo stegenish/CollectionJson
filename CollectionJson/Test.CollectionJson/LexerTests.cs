@@ -22,7 +22,7 @@ namespace Test.CollectionJson
         [InlineData(",", TokenType.Comma)]
         public void Lexer_SingleTokenTests(string json, TokenType tokenType)
         {
-            List<CJsonToken> tokens = Lexer.Lex(json);
+            List<JsonToken> tokens = Lexer.Lex(json);
             var actualToken = tokens.First();
             AssertToken(json, tokenType, actualToken);
         }
@@ -37,7 +37,7 @@ namespace Test.CollectionJson
         [InlineData(@"""\t""", "\"\t\"")]
         public void Lexer_StringEscapeSequence(string json, string expected)
         {
-            List<CJsonToken> tokens = Lexer.Lex(json);
+            List<JsonToken> tokens = Lexer.Lex(json);
             var actualToken = tokens.First();
             Assert.Equal(expected, actualToken.Token);
         }
@@ -45,7 +45,7 @@ namespace Test.CollectionJson
         [Fact]
         public void Lexer_InvalidEscapeSequence_ThrowsException()
         {
-            Assert.Throws<CJsonLexerException>(() => Lexer.Lex("\"\\d\""));
+            Assert.Throws<LexerException>(() => Lexer.Lex("\"\\d\""));
         }
 
         [Fact]
@@ -53,7 +53,7 @@ namespace Test.CollectionJson
         {
             var allTokens = Lexer.Lex("{ \"name\" : \"This is a string\" }");
             Assert.Equal(10, allTokens.Count);
-            List<CJsonToken> tokens = allTokens.Where(t => t.TokenType != TokenType.WhiteSpace).ToList();
+            List<JsonToken> tokens = allTokens.Where(t => t.TokenType != TokenType.WhiteSpace).ToList();
             
             AssertToken("{", TokenType.OpenCurly, tokens[0]);
             AssertToken("\"name\"", TokenType.String, tokens[1]);
@@ -66,7 +66,7 @@ namespace Test.CollectionJson
         public void Lexer_InsertsEndOfStreamToken()
         {
             var allTokens = Lexer.Lex("{ \"name\" : \"This is a string\" }");
-            List<CJsonToken> tokens = allTokens.Where(t => t.TokenType != TokenType.WhiteSpace).ToList();
+            List<JsonToken> tokens = allTokens.Where(t => t.TokenType != TokenType.WhiteSpace).ToList();
 
             AssertToken("", TokenType.EndOfStreamToken, tokens[5]);
         }
@@ -76,7 +76,7 @@ namespace Test.CollectionJson
         {
             var allTokens = Lexer.Lex("{ \"name\" : 123 }");
             Assert.Equal(10, allTokens.Count);
-            List<CJsonToken> tokens = allTokens.Where(t => t.TokenType != TokenType.WhiteSpace).ToList();
+            List<JsonToken> tokens = allTokens.Where(t => t.TokenType != TokenType.WhiteSpace).ToList();
 
             AssertToken("{", TokenType.OpenCurly, tokens[0]);
             AssertToken("\"name\"", TokenType.String, tokens[1]);
@@ -85,7 +85,7 @@ namespace Test.CollectionJson
             AssertToken("}", TokenType.CloseCurly, tokens[4]);
         }
 
-        private static void AssertToken(string expectedTokenString, TokenType expectedTokenType, CJsonToken actualToken)
+        private static void AssertToken(string expectedTokenString, TokenType expectedTokenType, JsonToken actualToken)
         {
             Assert.Equal(expectedTokenString, actualToken.Token);
             Assert.Equal(expectedTokenType, actualToken.TokenType);

@@ -2,11 +2,11 @@ using System.Globalization;
 
 namespace CollectionJson;
 
-public class CJsonToken
+public class JsonToken
 {
     public string Token { get; }
     public TokenType TokenType { get; }
-    public CJsonToken(string token, TokenType tokenType)
+    public JsonToken(string token, TokenType tokenType)
     {
         Token = token;
         TokenType = tokenType;
