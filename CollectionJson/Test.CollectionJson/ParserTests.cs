@@ -119,6 +119,17 @@ namespace Test.CollectionJson
             Assert.Equal("text2", value);
         }
 
+        [Theory]
+        [InlineData("123", ValueType.Integer)]
+        [InlineData("123.123", ValueType.Decimal)]
+        [InlineData(@"""a string""", ValueType.String)]
+        public void Parse_SingleValue(string json, ValueType expectedType)
+        {
+            ParsedJson result = Parser.Parse(Lexer.Lex(json));
+
+            Assert.Equal(expectedType, result.TopLevelType);
+        }
+
         [Fact]
         public void Parse_MissingComma_ThrowsException()
         {

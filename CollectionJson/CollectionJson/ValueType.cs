@@ -4,5 +4,8 @@ public enum ValueType
 {
     Unknown,
     Dictionary,
-    Array
+    Array,
+    Integer,
+    Decimal,
+    String
 }

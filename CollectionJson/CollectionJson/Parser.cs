@@ -12,7 +12,10 @@ public class Parser
         return value switch
         {
             Dictionary<string, object> => new ParsedJson(ValueType.Dictionary, value),
-            List<object> => new ParsedJson(ValueType.Array, value)
+            List<object> => new ParsedJson(ValueType.Array, value),
+            long => new ParsedJson(ValueType.Integer, value),
+            decimal => new ParsedJson(ValueType.Decimal, value),
+            string => new ParsedJson(ValueType.String, value),
         };
     }
 
