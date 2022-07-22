@@ -82,16 +82,6 @@ public class JsonReader
         return Consume(c.ToString());
     }
 
-    public JsonToken ReadFalse()
-    {
-        if (ConsumeIfMatch("false"))
-        {
-            return CreateToken("false", TokenType.False);
-        }
-
-        throw new LexerException("Invalid token starting at");
-    }
-
     public JsonToken ReadToken(string tokenString, TokenType tokenType)
     {
         if (ConsumeIfMatch(tokenString))
@@ -106,27 +96,6 @@ public class JsonReader
     {
         return CreateToken(Consume(c), tokenType);
     }
-
-    public JsonToken ReadTrue()
-    {
-        if (ConsumeIfMatch("true"))
-        {
-            return CreateToken("true", TokenType.True);
-        }
-
-        throw new LexerException("Invalid token starting at");
-    }
-
-    public JsonToken ReadNull()
-    {
-        if (ConsumeIfMatch("null"))
-        {
-            return CreateToken("null", TokenType.Null);
-        }
-
-        throw new LexerException("Invalid token starting at");
-    }
-
 
     public JsonToken ReadNumber()
     {

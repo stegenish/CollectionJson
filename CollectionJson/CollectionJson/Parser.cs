@@ -95,9 +95,3 @@ public class Parser
         throw new ParseException($"Error parsing token {tokenStream.Current.ParseErrorMsg()}, expected {tokenType} ");
     }
 }
-
-public class ParseException : Exception
-{
-    public ParseException(string s) : base(s)
-    { }
-}
